@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 引入Bootstrap -->
+<!-- https://getbootstrap.com/ -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>问卷管理员视角</title>
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="container page-header" style="margin-top: 15px;">
+		<h4 class="text-primary" style="font-size: 36px; font-family: 幼圆;">在线问卷系统</h4>
+	</div>
+
+	<form method="POST" action="/JavaWebExp3/servlet/editor">
+		<!-- 试卷标题 -->
+		<div class="container input-group" align="center" style="margin-left: 230px;">
+			<input type="text" name="title" class="form-control" placeholder="在此处输入标题" style="width:1000px;">
+		</div>
+		<br>
+
+		<!-- 单选题 -->
+		<div id="questionAndSelection">
+			<div id="container1" class="container">
+				<div class="row">
+					<div class="col-lg-1" style="text-align:right;">
+						<p class="text-info" style="color:black; font-size: 20px;">1.</p>
+					</div>
+					<div class="col-lg-11">
+						<ul class="list-inline">
+							<li>
+								<input name="question1" type="text" class="form-control" placeholder="题目描述" style="width:700px; margin-bottom: 10px;">
+							</li>
+						</ul>	
+					</div>
+				</div>
+				<div class="container" style="font-size: 20px; margin-left: 80px;">
+					<ul class="list-inline">
+						<li>
+							<input name="selection1-1" type="text" class="form-control" placeholder="选项描述" style="width:500px; margin-bottom: 10px;">
+						</li>
+					</ul>
+				</div>
+				<div class="container" style="font-size: 18px; margin-left: 80px;">
+					<button type="button" class="btn btn-primary" onclick="addSelection(this)">
+						<span class="glyphicon glyphicon-plus"></span>
+						添加选项
+					</button>
+					</div><div class="container" style="font-size: 18px; margin-left: 80px; margin-top: 10px;">
+						<span class="label label-info" style="font-size: 18px;">单选</span>
+						<input type="hidden" value="radio" name="1" />
+						<br />
+						<br />
+					</div>
+			</div>
+		</div>
+		<br>
+		<div align="center">
+				<button type="button" class="btn btn-success" style="font-size: 18px;" onclick="addQuestion('radio')">添加单选</button>
+				<button type="button" class="btn btn-success" style="font-size: 18px; margin-left:10px;" onclick="addQuestion('check')">添加多选</button>
+				<button type="submit" class="btn btn-primary" style="margin-left:10px; font-size: 18px;">保存并返回</button>
+				<button type="submit" class="btn btn-default" style="margin-left:10px; font-size: 18px;">不保存并返回</button>
+		</div>
+	</form>
+</body>
+</html>
+
+<script>
+	questionCount = 1;
+	selectionCount = new Array();
+	selectionCount[1] = 1;
+
+	questionContainer = document.querySelector("#questionAndSelection");
+	blankQuestionContianer = document.querySelector("#container1").cloneNode(true);
+	blankSelection = document.getElementsByName("selection1-1")[0];
+	function addQuestion(type) {
+		questionCount += 1;
+		newQuestionContainer = blankQuestionContianer.cloneNode(true);
+
+		questionDesc = newQuestionContainer.getElementsByTagName("input")[0];
+		questionDesc.setAttribute("name", "question" + questionCount);
+		questionNo = newQuestionContainer.getElementsByTagName("p")[0];
+		questionNo.innerText = questionCount+ ".";
+		selectionDesc = newQuestionContainer.getElementsByTagName("input")[1];
+		selectionDesc.setAttribute("name", "selection" + questionDesc.getAttribute("name").substr(8) + "-" + 1);
+
+		newType = newQuestionContainer.querySelector("[type=hidden]");
+		newType.setAttribute("value", type);
+		newType.setAttribute("name", questionCount);
+		if (type == "radio") {
+			newType.previousSibling.previousSibling.innerText = "单选";
+		} else {
+			newType.previousSibling.previousSibling.innerText = "多选";
+		}
+		questionContainer.appendChild(newQuestionContainer);
+	}
+	function addSelection(thisnode) {
+		cont = thisnode.parentNode.previousSibling.previousSibling;
+		childArr = cont.childNodes;
+		newUl = childArr[childArr.length - 2].cloneNode(true);
+		newSelction = newUl.getElementsByTagName("input")[0];
+		newSelectionName = newSelction.getAttribute("name");
+		ind = newSelectionName.indexOf("-");
+		NamePrefix = newSelectionName.substr(0, ind + 1);
+		NameEnd = parseInt(newSelectionName.substr(ind + 1)) + 1;
+		newSelction.setAttribute("name", NamePrefix + NameEnd);
+		cont.insertBefore(newUl, childArr[childArr.length - 1])
+	}
+</script>

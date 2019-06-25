@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- 引入Bootstrap -->
+<!-- https://getbootstrap.com/ -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/login.js"></script>
+
+<title>管理员登录</title>
+</head>
+<body>
+<div class="page-header" align="center">
+    <h3 style="font-family: 幼圆;">登录</h3>
+</div>
+<form name="form_login" method="POST" action="/JavaWebExp3/servlet/adminlogin" onsubmit="return judgeInput()">
+	<div class="container" align="center" style="width: 500px; text-align: center">
+
+		<!-- 用户名输入框 -->
+		<div class="input-group" style="width: 450px;">
+           	 <span class="input-group-addon">用户名</span>
+           	 <input type="text" id="input_username" name="input_username" class="form-control" placeholder="">
+		</div>
+
+		<!-- 用户名不合法错误提示 -->
+		<p id="p_username_errormsg" style="height:30px; font-size: 16px; color: red;"></p>
+
+		<!-- 密码输入框 -->
+		<div class="input-group" style="width: 450px;">
+           	 <span class="input-group-addon">密码</span>
+             <input type="password" id="input_password" name="input_password" class="form-control" placeholder="">
+		</div>
+
+		<!-- 密码不合法错误提示 -->
+		<p id="p_password_errormsg" style="height:30px; font-size: 16px; color: red;"></p>
+
+		<!-- 登录按钮 -->
+		<div class="input-group" style="text-align: justify; width: 450px; text-align: center;">
+			<button name="btn_login" type="submit" class="btn btn-primary" style="width: 200px">登录</button> 
+		</div>
+		<br>
+		<a href="./userlogin.html">前往用户登录界面</a>
+
+	</div>
+</form>
+</body>
+</html>

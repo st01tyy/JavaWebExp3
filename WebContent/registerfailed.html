@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- 引入Bootstrap -->
+<!-- https://getbootstrap.com/ -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/register.js"></script>
+
+<title>注册</title>
+</head>
+<body>
+<div class="page-header" align="center">
+    <h3 style="font-family: 幼圆;">注册</h3>
+</div>
+<form name="form_login" method="POST" action="/JavaWebExp3/servlet/register" onsubmit="return judgeInput()">
+	<div class="container" align="center" style="width: 500px; text-align: center">
+
+		<!-- 用户名输入框 -->
+		<div class="input-group" style="width: 450px;">
+           	 <input type="text" id="input_username" name="input_username" class="form-control" placeholder="在此处输入用户名">
+		</div>
+
+		<!-- 用户名不合法或已存在错误提示 -->
+		<p id="p_username_errormsg" style="height:30px; font-size: 16px; color: red;">用户名已存在</p>
+
+		<!-- 密码输入框 -->
+		<div class="input-group" style="width: 450px;">
+             <input type="password" id="input_password" name="input_password" class="form-control" placeholder="在此处输入密码">
+		</div>
+
+		<!-- 密码不合法错误提示 -->
+		<p id="p_password_errormsg" style="height:30px; font-size: 16px; color: red;"></p>
+
+		<!-- 确认密码输入框 -->
+		<div class="input-group" style="width: 450px;">
+             <input type="password" id="input_pwdconfirm" name="input_pwdconfirm" class="form-control" placeholder="再输入一次密码">
+		</div>
+
+		<!-- 密码确认错误提示 -->
+		<p id="p_passwordconfirm_errormsg" style="height:30px; font-size: 16px; color: red;"></p>
+
+		<!-- 昵称输入框 -->
+		<div class="input-group" style="width: 450px;">
+           	 <input type="text" id="input_nickname" name="input_nickname" class="form-control" placeholder="在此处输入昵称">
+		</div>
+
+		<!-- 注册按钮 -->
+		<div class="input-group" style="text-align: justify; width: 450px; text-align: center;">
+			<button name="btn_login" type="submit" class="btn btn-primary" style="width: 200px; margin: 30px 0px 0px 0px;">注册</button>
+			<button name="btn_login" type="button" onclick="location.href='./userlogin.html'" class="btn btn-default" style="width: 200px; margin: 30px 0px 0px 24px;">登录</button> 
+		</div>
+
+	</div>
+</form>
+</body>
+</html>
